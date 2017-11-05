@@ -1,0 +1,24 @@
+import sqlite3
+
+cx=sqlite3.connect('test.db')
+
+cu=cx.cursor()
+
+cu.execute('create table if not exists test (id integer primary key,name text)')
+
+fr=open('test.txt')
+
+i=0
+
+for line in fr.readlines():
+    
+  cu.execute('insert into test values(?,?)',(i,line))
+
+  i+=1
+
+cu.close()
+
+cx.commit()
+
+cx.close()
+
